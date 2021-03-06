@@ -25,7 +25,6 @@ def generatepage(temp_lines, temp, counter):
         if temp >= 0:
             tmp_line = str(temp_lines[temp])
             # tmp_line = re.sub('\w','',tmp_line)
-            print(tmp_line)
             f.write("  - name: " + str(tmp_line) + "\n" +
                     "    icon: {fileID: 2800000, guid: 814c40cdd23a7fe488c8826cf7d9b315, type: 3}\n" +
                     "    type: 103\n" +
@@ -64,18 +63,14 @@ else:
     else:
         if sys.argv[1] == "post":
             print("Processing folder.. please wait!")
-            print(sys.argv[3])
             oldFolder = int(sys.argv[3])
             while oldFolder >= 0:
-                print(oldFolder)
                 asset = open("menu" + str(oldFolder) + ".asset")
                 meta = open("menu" + str(oldFolder) + ".asset.meta")
                 lines = meta.readlines()
                 guid = lines[1].replace("guid: ", "")
                 meta.close()
-                print(guid)
                 lines = asset.readlines()
-                print(lines)
                 i = 0
                 while i < len(lines):
                     lines[i] = lines[i].replace("FIXMEDRISCOLL", "{fileID: 11400000, guid: "+str(guid)+", type: 2}")
@@ -85,3 +80,4 @@ else:
                 overwriteasset.close()
                 asset.close()
                 oldFolder -= 1
+    print('Job completed, took', time.time() - startTime, 's to run.');
